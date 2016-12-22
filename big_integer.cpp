@@ -47,6 +47,9 @@ static big_integer mul_power_of_BASE(big_integer const& a, size_t n)
 // i={7..5}
 static bool shifted_less(big_integer const& a, big_integer const& b, size_t n)
 {
+    if (b.digits.size() == 0)
+        return false;
+
     if (a.digits.size() != (b.digits.size() + n))
         return a.digits.size() < (b.digits.size() + n);
 

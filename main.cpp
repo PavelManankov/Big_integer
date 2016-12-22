@@ -119,6 +119,9 @@ int main()
     warn_if_false(big_integer("100000000000000")
                 / big_integer("10000")
                == big_integer(    "10000000000"));
+    warn_if_false(big_integer("12387641827346128734612983764") * big_integer(BASE) * big_integer(BASE)
+                / big_integer("12387641827346128734612983764")
+               == big_integer(BASE) * big_integer(BASE));
 
     print_test_results();
 }
