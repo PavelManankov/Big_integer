@@ -35,5 +35,6 @@ bool operator!=(big_integer const& a, big_integer const& b);
 bool operator>(big_integer const& a, big_integer const& b);
 bool operator<(big_integer const& a, big_integer const& b);
 bool operator<=(big_integer const& a, big_integer const& b);
+bool operator>=(big_integer const& a, big_integer const& b);
 
 #endif // BIG_INTEGER_H

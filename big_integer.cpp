@@ -394,3 +394,8 @@ bool operator<=(big_integer const&a,big_integer const&b)
         return !(a>b);
 
 }
+
+bool operator>=(big_integer const& a, big_integer const& b)
+{
+    return !(b > a);
+}
