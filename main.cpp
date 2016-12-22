@@ -8,6 +8,8 @@
 #include <chrono>
 #include <iostream>
 
+#include "testing.h"
+
 using namespace std;
 
 const int BASE = 2000000;
@@ -82,23 +84,6 @@ bool operator==(big_integer const&a,big_integer const&b)
 
     return true;
 }
-
-size_t tests_run = 0;
-size_t tests_fail = 0;
-
-
-void warn_if_false_func(bool cond, char const* expr_str)
-{
-    if (!cond)
-   {
-        tests_fail++;
-        printf("check %s failed\n", expr_str);
-   }
-    tests_run++;
-
-}
-
-#define warn_if_false(expr) warn_if_false_func((expr),#expr)
 
 bool operator>(big_integer const&a,big_integer const&b)
 {
@@ -669,10 +654,5 @@ int main()
                 / big_integer("10000")
                == big_integer(    "10000000000"));
 
-    if (tests_run == 0)
-        printf("no tests were run");
-    else if (tests_fail == 0)
-        printf("all %zu tests are run successfully\n", tests_run);
-    else
-        printf("%zu/%zu tests failed", tests_fail, tests_run);
+    print_test_results();
 }
