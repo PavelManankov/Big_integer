@@ -258,15 +258,19 @@ big_integer operator*(big_integer const&a, int b)
     big_integer c;
     if(b==0)
         return c;
-    for(size_t i=0; i!=a.digits.size();++i)
+
+    c.digits.resize(a.digits.size() + 1);
+    size_t i;
+    for(i=0; i!=a.digits.size();++i)
     {
         double_digit us=double_digit(b)*a.digits[i]+carry;
-        c.digits.push_back(us%BASE);
+        c.digits[i] = us%BASE;
         carry=us/BASE;
 
     }
-    if(carry!=0)
-    c.digits.push_back(carry);
+    c.digits[i] = carry;
+
+    trim_leading_zeros(c.digits);
     return c;
 }
 
