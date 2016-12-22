@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    testing.cpp
+    testing.cpp \
+    big_integer.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -17,4 +18,5 @@ QMAKE_LFLAGS_DEBUG += -fsanitize=address,undefined
 QMAKE_CXXFLAGS += -std=c++11
 
 HEADERS += \
-    testing.h
+    testing.h \
+    big_integer.h
