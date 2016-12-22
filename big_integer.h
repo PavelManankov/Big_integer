@@ -12,7 +12,7 @@ struct big_integer
 {
     big_integer();
     big_integer(int a);
-    big_integer(std::string const& str);
+    explicit big_integer(std::string const& str);
 
     digit get_digit(size_t index) const;
 
