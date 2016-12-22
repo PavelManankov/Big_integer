@@ -362,6 +362,11 @@ bool operator==(big_integer const& a, big_integer const& b)
     return true;
 }
 
+bool operator!=(big_integer const& a, big_integer const& b)
+{
+    return !(a == b);
+}
+
 bool operator>(big_integer const&a,big_integer const&b)
 {
     if (a.digits.size() != b.digits.size())
