@@ -349,13 +349,14 @@ big_integer operator%(big_integer const& delimoe, big_integer const& delitel)
     return delimoe - (delimoe / delitel) * delitel;
 }
 
-bool operator==(big_integer const&a,big_integer const&b)
+bool operator==(big_integer const& a, big_integer const& b)
 {
-    if (a.digits.size()!=b.digits.size())
+    if (a.digits.size() != b.digits.size())
         return false;
-    size_t m=a.digits.size();
-    for(size_t i=0;i<m;i++)
-        if(a.digits[i]!=b.digits[i])
+
+    size_t m = a.digits.size();
+    for(size_t i = 0; i < m; i++)
+        if(a.digits[i] != b.digits[i])
              return false;
 
     return true;
