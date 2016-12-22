@@ -32,8 +32,8 @@ big_integer operator%(big_integer const& delimoe, big_integer const& delitel);
 
 bool operator==(big_integer const& a, big_integer const& b);
 bool operator!=(big_integer const& a, big_integer const& b);
-bool operator>(big_integer const& a, big_integer const& b);
 bool operator<(big_integer const& a, big_integer const& b);
+bool operator>(big_integer const& a, big_integer const& b);
 bool operator<=(big_integer const& a, big_integer const& b);
 bool operator>=(big_integer const& a, big_integer const& b);
 

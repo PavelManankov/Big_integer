@@ -367,35 +367,31 @@ bool operator!=(big_integer const& a, big_integer const& b)
     return !(a == b);
 }
 
-bool operator>(big_integer const&a,big_integer const&b)
+bool operator<(big_integer const& a, big_integer const& b)
 {
     if (a.digits.size() != b.digits.size())
-        return a.digits.size() > b.digits.size();
+        return a.digits.size() < b.digits.size();
 
     for (size_t i = a.digits.size(); i != 0; --i)
     {
         if (a.digits[i - 1] != b.digits[i - 1])
-            return a.digits[i - 1] > b.digits[i - 1];
+            return a.digits[i - 1] < b.digits[i - 1];
     }
 
     return false;
 }
 
-bool operator<(big_integer const&a,big_integer const&b)
+bool operator>(big_integer const& a, big_integer const& b)
 {
-
-        return (b>a);
-
+    return b < a;
 }
 
-bool operator<=(big_integer const&a,big_integer const&b)
+bool operator<=(big_integer const& a,big_integer const& b)
 {
-
-        return !(a>b);
-
+    return !(b < a);
 }
 
 bool operator>=(big_integer const& a, big_integer const& b)
 {
-    return !(b > a);
+    return !(a < b);
 }
