@@ -102,25 +102,18 @@ void warn_if_false_func(bool cond, char const* expr_str)
 
 bool operator>(big_integer const&a,big_integer const&b)
 {
-    if(a.digits.size()==b.digits.size())
-        {
+    if (a.digits.size() != b.digits.size())
+        return a.digits.size() > b.digits.size();
 
-        for(size_t i=a.digits.size();i!=0;)
-        {
-           if (a.digits[i-1]==b.digits[i-1])
-               --i;
-            else
+    for (size_t i = a.digits.size(); i != 0; --i)
+    {
+        if (a.digits[i - 1] != b.digits[i - 1])
+            return a.digits[i - 1] > b.digits[i - 1];
+    }
 
-               return a.digits[i-1]>b.digits[i-1];
-
-        }
-        return false;
-
-        }
-        return a.digits.size()>b.digits.size();
-
-
+    return false;
 }
+
 bool operator<(big_integer const&a,big_integer const&b)
 {
 
