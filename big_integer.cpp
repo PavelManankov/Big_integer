@@ -230,22 +230,18 @@ big_integer operator-(big_integer const&a,big_integer const&b)
 
     for(size_t i=0;i<a.digits.size();++i)
     {
+        double_digit minus=a.digits[i]-b.get_digit(i)+take;
+
+        if(minus<0)
         {
-            double_digit minus=a.digits[i]-b.get_digit(i)+take;
-
-            if(minus<0)
-            {
-                 c.digits.push_back(BASE+minus);
-                 take=-1;
-            }
-            else
-            {
-                c.digits.push_back(minus);
-                take=0;
-            }
-
+             c.digits.push_back(BASE+minus);
+             take=-1;
         }
-   // while ((t-m)>0);
+        else
+        {
+            c.digits.push_back(minus);
+            take=0;
+        }
     }
     trim_leading_zeros(c.digits);
     return c;
