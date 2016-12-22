@@ -317,27 +317,6 @@ big_integer operator/(big_integer delimoe, big_integer const& delitel)
 
     divide_school_book(delimoe,delitel,chastnoe);
     return chastnoe;
-
-    /*
-    big_integer left;
-    big_integer right = delimoe+big_integer("1");
-
-    for(;;)
-    {
-        if(left==right)
-           return left - big_integer("1");
-
-        big_integer index=(right+left)/2;
-        big_integer element=index*delitel;
-        if (element==delimoe)
-           return index;
-
-        if(element<delimoe)
-           left=index+big_integer("1");
-        else
-           right=index;
-    }
-*/
 }
 
 big_integer operator%(big_integer const& delimoe, big_integer const& delitel)
