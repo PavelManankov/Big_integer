@@ -7,8 +7,6 @@ SOURCES += main.cpp \
     testing.cpp \
     big_integer.cpp
 
-include(deployment.pri)
-qtcAddDeployment()
 
 #DEFINES += _GLIBCXX_DEBUG
 
