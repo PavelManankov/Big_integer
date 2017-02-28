@@ -17,6 +17,7 @@ struct big_integer
     digit get_digit(size_t index) const;
 
     std::vector<digit> digits;
+    bool sign;
 };
 
 void print(big_integer val);
@@ -42,6 +43,8 @@ big_integer& operator++(big_integer& a);
 big_integer operator++(big_integer& a, int);
 big_integer& operator--(big_integer& a);
 big_integer operator--(big_integer& a, int);
+
+big_integer operator-(big_integer const& a);
 
 bool operator==(big_integer const& a, big_integer const& b);
 bool operator!=(big_integer const& a, big_integer const& b);

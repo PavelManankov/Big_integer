@@ -9,6 +9,8 @@ static void trim_leading_zeros(big_integer &a)
 {
     while (a.digits.size()!=0 && a.digits[a.digits.size()-1] == 0)
         a.digits.pop_back();
+    if (a.digits.size()==0)
+        a.sign = false;
 }
 
 static void divide(big_integer const& delimoe, int delitel,big_integer& chastnoe,int& ostatok)
@@ -151,11 +153,19 @@ static void divide_school_book(big_integer &delimoe,big_integer const&delitel,bi
 }
 
 big_integer::big_integer()
-{}
+{
+    sign = false;
+}
 
 big_integer::big_integer(int a)
 {
-    assert(a >= 0);
+    if (a < 0)
+    {
+        a = -a;
+        sign = true;
+    }
+    else
+        sign = false;
 
     while (a != 0)
     {
@@ -166,6 +176,7 @@ big_integer::big_integer(int a)
 
 big_integer::big_integer(std::string const& str)
 {
+    sign = false;
     for (size_t i = 0; i != str.size(); ++i)
     {
         char c = str[i];
@@ -184,6 +195,12 @@ digit big_integer::get_digit(size_t index) const
 
 void print(big_integer val)
 {
+    if (val.sign)
+    {
+        printf("-");
+        val = -val;
+    }
+
     if (val.digits.size() == 0)
         printf("0");
     else
@@ -278,6 +295,7 @@ big_integer operator*(big_integer const&a,big_integer const&b)
 {
    big_integer c;
    c.digits.resize(a.digits.size()+b.digits.size());
+   c.sign = a.sign^b.sign;
 
    for(size_t i=0;i<a.digits.size();++i)
    {
@@ -403,8 +421,18 @@ big_integer operator--(big_integer& a, int)
     return old;
 }
 
+big_integer operator-(big_integer const& a)
+{
+    big_integer temp = a;
+    if(temp.digits.size()!=0)
+        temp.sign = !temp.sign;
+    return temp;
+}
+
 bool operator==(big_integer const& a, big_integer const& b)
 {
+    if(a.sign!=b.sign)
+        return false;
     if (a.digits.size() != b.digits.size())
         return false;
 
