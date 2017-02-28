@@ -5,10 +5,10 @@
 
 using namespace std;
 
-static void trim_leading_zeros(vector<digit> &a)
+static void trim_leading_zeros(big_integer &a)
 {
-    while (a.size()!=0 && a[a.size()-1] == 0)
-        a.pop_back();
+    while (a.digits.size()!=0 && a.digits[a.digits.size()-1] == 0)
+        a.digits.pop_back();
 }
 
 static void divide(big_integer const& delimoe, int delitel,big_integer& chastnoe,int& ostatok)
@@ -22,7 +22,7 @@ static void divide(big_integer const& delimoe, int delitel,big_integer& chastnoe
         chastnoe.digits[i-1]=t/delitel;
           carry =t%delitel;
     }
-     trim_leading_zeros(chastnoe.digits);
+     trim_leading_zeros(chastnoe);
       ostatok=carry;
   }
 
@@ -100,7 +100,7 @@ static void shifted_sub(big_integer& minuend, big_integer const& subtrahend, siz
         }
         --minuend.digits[i + n];
     }
-    trim_leading_zeros(minuend.digits);
+    trim_leading_zeros(minuend);
 }
 
 static int guess_digit(big_integer& delimoeostatok, big_integer const& delitel, size_t n)
@@ -147,7 +147,7 @@ static void divide_school_book(big_integer &delimoe,big_integer const&delitel,bi
         chastnoe.digits[i-1] = guess_digit(delimoe,delitel,i-1);
     }
 
-    trim_leading_zeros(chastnoe.digits);
+    trim_leading_zeros(chastnoe);
 }
 
 big_integer::big_integer()
@@ -246,7 +246,7 @@ big_integer operator-(big_integer const&a,big_integer const&b)
             take=0;
         }
     }
-    trim_leading_zeros(c.digits);
+    trim_leading_zeros(c);
     return c;
 }
 
@@ -270,7 +270,7 @@ big_integer operator*(big_integer const&a, int b)
     }
     c.digits[i] = carry;
 
-    trim_leading_zeros(c.digits);
+    trim_leading_zeros(c);
     return c;
 }
 
@@ -292,7 +292,7 @@ big_integer operator*(big_integer const&a,big_integer const&b)
        assert(c.digits[i+b.digits.size()]==0);
        c.digits[i+b.digits.size()]=carry;
    }
-   trim_leading_zeros(c.digits);
+   trim_leading_zeros(c);
    return c;
 }
 
