@@ -129,10 +129,12 @@ int main()
     warn_if_false((a+=99)==big_integer("100"));
     warn_if_false((a/=99)==big_integer("1"));
     warn_if_false((a*=99)==big_integer("99"));
-    warn_if_false((++a)==big_integer("100"));
-    warn_if_false((a++)==big_integer("100"));
-    warn_if_false((--a)==big_integer("100"));
-    warn_if_false((a--)==big_integer("100"));
+    warn_if_false((a/=10)==big_integer("9"));
+    warn_if_false((a%=5)==big_integer("4"));
+    warn_if_false((++a)==big_integer("5"));
+    warn_if_false((a++)==big_integer("5"));
+    warn_if_false((--a)==big_integer("5"));
+    warn_if_false((a--)==big_integer("5"));
 
     print_test_results();
 }

@@ -347,9 +347,33 @@ big_integer& operator*=(big_integer& a,big_integer const& b)
     return a;
 }
 
+big_integer& operator*=(big_integer& a,int b)
+{
+    a = a * b;
+    return a;
+}
+
 big_integer& operator/=(big_integer& a,big_integer const& b)
 {
     a = a / b;
+    return a;
+}
+
+big_integer& operator/=(big_integer& a,int b)
+{
+    a = a / b;
+    return a;
+}
+
+big_integer& operator%=(big_integer& a, big_integer const& b)
+{
+    a = a % b;
+    return a;
+}
+
+big_integer& operator%=(big_integer& a, int b)
+{
+    a = a % b;
     return a;
 }
 
