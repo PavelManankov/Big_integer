@@ -123,5 +123,16 @@ int main()
                 / big_integer("12387641827346128734612983764")
                == big_integer(BASE) * big_integer(BASE));
 
+    big_integer a = 100;
+
+    warn_if_false((a-=99)==big_integer("1"));
+    warn_if_false((a+=99)==big_integer("100"));
+    warn_if_false((a/=99)==big_integer("1"));
+    warn_if_false((a*=99)==big_integer("99"));
+    warn_if_false((++a)==big_integer("100"));
+    warn_if_false((a++)==big_integer("100"));
+    warn_if_false((--a)==big_integer("100"));
+    warn_if_false((a--)==big_integer("100"));
+
     print_test_results();
 }

@@ -329,6 +329,56 @@ big_integer operator%(big_integer const& delimoe, big_integer const& delitel)
     return delimoe - (delimoe / delitel) * delitel;
 }
 
+big_integer& operator+=(big_integer& a,big_integer const& b)
+{
+    a = a + b;
+    return a;
+}
+
+big_integer& operator-=(big_integer& a,big_integer const& b)
+{
+    a = a - b;
+    return a;
+}
+
+big_integer& operator*=(big_integer& a,big_integer const& b)
+{
+    a = a * b;
+    return a;
+}
+
+big_integer& operator/=(big_integer& a,big_integer const& b)
+{
+    a = a / b;
+    return a;
+}
+
+big_integer& operator++(big_integer& a)
+{
+    a = a + 1;
+    return a;
+}
+
+big_integer operator++(big_integer& a, int)
+{
+    big_integer old = a;
+    ++a;
+    return old;
+}
+
+big_integer& operator--(big_integer& a)
+{
+    a = a - 1;
+    return a;
+}
+
+big_integer operator--(big_integer& a, int)
+{
+    big_integer old = a;
+    --a;
+    return old;
+}
+
 bool operator==(big_integer const& a, big_integer const& b)
 {
     if (a.digits.size() != b.digits.size())
