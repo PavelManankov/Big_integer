@@ -289,8 +289,6 @@ big_integer operator*(big_integer const&a,big_integer const&b)
            c.digits[i+j] = tmp % BASE;
            carry=tmp / BASE;
        }
-       //assert - i?iaa?yao oneiaea eioi?ia a iai anou
-       // true - ie?aai ia aaeaao, false - auaaao ioeaeo
        assert(c.digits[i+b.digits.size()]==0);
        c.digits[i+b.digits.size()]=carry;
    }
