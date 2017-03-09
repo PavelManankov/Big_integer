@@ -107,6 +107,10 @@ int main()
     warn_if_false(big_integer("99") + big_integer("1") == big_integer("100"));
     warn_if_false(big_integer("0099") + big_integer("001") == big_integer("100"));
     warn_if_false(big_integer("99") < big_integer("100"));
+    warn_if_false(!(big_integer("5") > big_integer("5")));
+    warn_if_false(!(big_integer("5") < -big_integer("5")));
+    warn_if_false(-big_integer("5") < -big_integer("4"));
+    warn_if_false((big_integer("0") * -1)==big_integer("0"));
     warn_if_false(big_integer("100") > big_integer("99"));
     warn_if_false(big_integer("321") > big_integer("123"));
     warn_if_false(big_integer("123") < big_integer("321"));

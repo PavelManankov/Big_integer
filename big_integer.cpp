@@ -267,7 +267,7 @@ big_integer operator-(big_integer const&a,big_integer const&b)
     return c;
 }
 
-big_integer operator*(big_integer const&a, int b)
+big_integer mul_long_short(big_integer const&a, int b)
 {
     assert(b >= 0 && b < BASE);
 
@@ -289,6 +289,24 @@ big_integer operator*(big_integer const&a, int b)
 
     trim_leading_zeros(c);
     return c;
+}
+
+big_integer operator*(big_integer const&a, int b)
+{
+    if (a.digits.size()==0||b==0)
+        return big_integer();
+
+    if (b>0 && b < BASE)
+        return mul_long_short(a, b);
+
+    if(b<0 && -b < BASE)
+    {
+        big_integer result = mul_long_short(a, -b);// мы к отрицательному еще добавляем один минус чтобы его сделать положительеым для assert
+        result.sign = !result.sign;
+        return result;
+    }
+
+    return a * big_integer(b);
 }
 
 big_integer operator*(big_integer const&a,big_integer const&b)
@@ -449,7 +467,7 @@ bool operator!=(big_integer const& a, big_integer const& b)
     return !(a == b);
 }
 
-bool operator<(big_integer const& a, big_integer const& b)
+bool abs_less(big_integer const& a, big_integer const& b)
 {
     if (a.digits.size() != b.digits.size())
         return a.digits.size() < b.digits.size();
@@ -461,6 +479,18 @@ bool operator<(big_integer const& a, big_integer const& b)
     }
 
     return false;
+}
+
+bool operator<(big_integer const& a, big_integer const& b)
+{
+    if  (a.sign && b.sign)
+        return abs_less(b, a);
+    else if(!a.sign && b.sign)
+        return false;
+    else if(a.sign && !b.sign)
+        return true;
+    else
+        return abs_less(a, b);
 }
 
 bool operator>(big_integer const& a, big_integer const& b)
