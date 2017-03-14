@@ -110,6 +110,8 @@ int main()
     warn_if_false(!(big_integer("5") > big_integer("5")));
     warn_if_false(!(big_integer("5") < -big_integer("5")));
     warn_if_false(-big_integer("5") < -big_integer("4"));
+    warn_if_false(-big_integer("5") > -big_integer("6"));
+    warn_if_false(-big_integer("5") < -big_integer("2"));
     warn_if_false((big_integer("0") * -1)==big_integer("0"));
     warn_if_false(big_integer("100") > big_integer("99"));
     warn_if_false(big_integer("321") > big_integer("123"));
