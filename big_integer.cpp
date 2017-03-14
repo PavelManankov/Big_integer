@@ -221,7 +221,21 @@ void print(big_integer val)
     printf("\n");
 }
 
-big_integer operator+(big_integer const& a,big_integer const& b)
+static bool abs_less(big_integer const& a, big_integer const& b)
+{
+    if (a.digits.size() != b.digits.size())
+        return a.digits.size() < b.digits.size();
+
+    for (size_t i = a.digits.size(); i != 0; --i)
+    {
+        if (a.digits[i - 1] != b.digits[i - 1])
+            return a.digits[i - 1] < b.digits[i - 1];
+    }
+
+    return false;
+}
+
+static big_integer abs_sum(big_integer const& a,big_integer const& b)
 {
     big_integer c;
     size_t m;
@@ -243,8 +257,9 @@ big_integer operator+(big_integer const& a,big_integer const& b)
     return c;
 }
 
-big_integer operator-(big_integer const&a,big_integer const&b)
+static big_integer abs_difference(big_integer const&a,big_integer const&b)
 {
+    assert(!abs_less(a, b));
     big_integer c;
     digit take=0;
 
@@ -263,8 +278,38 @@ big_integer operator-(big_integer const&a,big_integer const&b)
             take=0;
         }
     }
+    assert(take == 0);
     trim_leading_zeros(c);
     return c;
+}
+
+big_integer operator+(big_integer const& a,big_integer const& b)
+{
+    big_integer result;
+    if (a.sign == b.sign)
+    {
+        result = abs_sum(a, b);
+        result.sign = a.sign;
+    }
+    else
+    {
+        if (abs_less(a, b))
+        {
+            result = abs_difference(b, a);
+            result.sign = b.sign;
+        }
+        else
+        {
+            result = abs_difference(a, b);
+            result.sign = a.sign;
+        }
+    }
+    return result;
+}
+
+big_integer operator-(big_integer const&a,big_integer const&b)
+{
+    return a + -b;
 }
 
 big_integer mul_long_short(big_integer const&a, int b)
@@ -465,20 +510,6 @@ bool operator==(big_integer const& a, big_integer const& b)
 bool operator!=(big_integer const& a, big_integer const& b)
 {
     return !(a == b);
-}
-
-bool abs_less(big_integer const& a, big_integer const& b)
-{
-    if (a.digits.size() != b.digits.size())
-        return a.digits.size() < b.digits.size();
-
-    for (size_t i = a.digits.size(); i != 0; --i)
-    {
-        if (a.digits[i - 1] != b.digits[i - 1])
-            return a.digits[i - 1] < b.digits[i - 1];
-    }
-
-    return false;
 }
 
 bool operator<(big_integer const& a, big_integer const& b)
