@@ -141,6 +141,7 @@ int main()
     warn_if_false((a++)==big_integer("5"));
     warn_if_false((--a)==big_integer("5"));
     warn_if_false((a--)==big_integer("5"));
+    warn_if_false(big_integer(-5) == -big_integer(5));
 
     print_test_results();
 }
