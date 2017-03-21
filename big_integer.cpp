@@ -15,18 +15,25 @@ static void trim_leading_zeros(big_integer &a)
 
 static void divide(big_integer const& delimoe, int delitel,big_integer& chastnoe,int& ostatok)
 {
+    assert(delitel > 0 && delitel < BASE);
+
     digit carry=0;
 
     chastnoe.digits.resize(delimoe.digits.size());
+    chastnoe.sign = delimoe.sign;
     for(size_t i=delimoe.digits.size();i!=0;--i)
     {
         double_digit t=double_digit(carry)*BASE+delimoe.digits[i-1];
         chastnoe.digits[i-1]=t/delitel;
           carry =t%delitel;
     }
-     trim_leading_zeros(chastnoe);
-      ostatok=carry;
-  }
+    trim_leading_zeros(chastnoe);
+
+    if(delimoe.sign)
+        ostatok = -carry;
+    else
+        ostatok=carry;
+}
 
 // a * 10^n
 static big_integer mul_power_of_BASE(big_integer const& a, size_t n)
@@ -134,6 +141,8 @@ static int guess_digit(big_integer& delimoeostatok, big_integer const& delitel, 
 
 static void divide_school_book(big_integer &delimoe,big_integer const&delitel,big_integer &chastnoe)
 {
+    assert(!delitel.sign);
+
     if (delitel.digits.size() == 1)
     {
         int remainder;
@@ -142,6 +151,7 @@ static void divide_school_book(big_integer &delimoe,big_integer const&delitel,bi
         return;
     }
 
+    chastnoe.sign = delimoe.sign;
     chastnoe.digits.resize(delimoe.digits.size()-delitel.digits.size()+1);
 
     for(size_t i=chastnoe.digits.size(); i!=0; i--)
@@ -377,29 +387,52 @@ big_integer operator*(big_integer const&a,big_integer const&b)
 
 big_integer operator/(big_integer const& delimoe,int delitel)
 {
-   big_integer chastnoe;
-            int ostatok;
-            //divide
+    assert(delitel != 0);
 
-            divide(delimoe, delitel, chastnoe, ostatok);
-    return chastnoe;
+    big_integer chastnoe;
+    int ostatok;
+
+    if (delitel>0 && delitel < BASE)
+    {
+        divide(delimoe, delitel, chastnoe, ostatok);
+        return chastnoe;
+    }
+
+    if(delitel<0 && -delitel < BASE)
+    {
+        divide(-delimoe, -delitel, chastnoe, ostatok);
+        return chastnoe;
+    }
+
+    return delimoe / big_integer(delitel);
 }
 
 int operator%(big_integer const& delimoe, int delitel)
 {
-
     big_integer chastnoe;
-             int ostatok;
-             //divide
-    divide(delimoe, delitel, chastnoe, ostatok);
-     return ostatok;
+    int ostatok;
+
+    if(delitel<0)
+        divide(-delimoe, -delitel, chastnoe, ostatok);// минус меняет знак
+    else
+        divide(delimoe, delitel, chastnoe, ostatok);
+    return ostatok;
 }
 
 big_integer operator/(big_integer delimoe, big_integer const& delitel)
 {
+    assert(delitel != 0);
+
     big_integer chastnoe;
 
-    divide_school_book(delimoe,delitel,chastnoe);
+    if (delitel.sign)
+    {
+        delimoe = -delimoe;
+        divide_school_book(delimoe,-delitel,chastnoe);
+    }
+    else
+        divide_school_book(delimoe,delitel,chastnoe);
+
     return chastnoe;
 }
 

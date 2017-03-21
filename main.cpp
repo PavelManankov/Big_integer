@@ -143,5 +143,49 @@ int main()
     warn_if_false((a--)==big_integer("5"));
     warn_if_false(big_integer(-5) == -big_integer(5));
 
+    //тесты покрытия
+    warn_if_false(-big_integer("123") * big_integer("123")==-big_integer("15129"));
+    warn_if_false(big_integer("123") + -big_integer("124")==-big_integer("1"));
+    warn_if_false(big_integer("124") + -big_integer("123")==big_integer("1"));
+    warn_if_false(-big_integer("123") + -big_integer("123")==-big_integer("246"));
+    warn_if_false(big_integer("123")%big_integer("60")==big_integer("3"));
+    warn_if_false(big_integer("123")*big_integer("0")==big_integer("0"));
+    warn_if_false(big_integer("123")*big_integer(-123)==-big_integer("15129"));
+
+    big_integer l = 100;
+    big_integer r = 100;
+
+    warn_if_false((l+=r)==big_integer("200"));
+    warn_if_false((l-=r)==big_integer("100"));
+    warn_if_false((l/=r)==big_integer("1"));
+    warn_if_false((l*=r)==big_integer("100"));
+    warn_if_false((l%=r)==big_integer("0"));
+    warn_if_false(-big_integer("1") < big_integer("1"));
+    warn_if_false(big_integer("123")*(-123)==-big_integer("15129"));
+    warn_if_false(big_integer("1")*(123123123)==big_integer("123123123"));
+    warn_if_false(big_integer("1231")+big_integer("123")==big_integer("1354"));
+    warn_if_false(-big_integer("412341234") / -big_integer("23451")==big_integer("17583"));
+    warn_if_false(-big_integer("412341234") / big_integer("23451")==-big_integer("17583"));
+    warn_if_false(-big_integer("412341234") / big_integer("23451")==-big_integer("17583"));
+    warn_if_false(-big_integer("33") /11==-big_integer("3"));
+    warn_if_false(-big_integer("33") /-11==big_integer("3"));
+    warn_if_false(big_integer("33") /-11==-big_integer("3"));
+    warn_if_false(33/-big_integer("11") ==-big_integer("3"));
+    warn_if_false(-big_integer("123")%big_integer("60")==-big_integer("3"));
+    warn_if_false(-big_integer("123")%(60)==-big_integer("3"));
+    warn_if_false(-big_integer("123")%(-60)==big_integer("3"));
+    warn_if_false(-big_integer("123") != big_integer("123"));
+    warn_if_false(big_integer("123") != big_integer("1234"));
+    warn_if_false(big_integer("123") >= big_integer("122"));
+    warn_if_false(big_integer("122") <= big_integer("123"));
+    warn_if_false(big_integer("20") != big_integer("200000000"));
+    warn_if_false(big_integer("0") / big_integer("2")==(big_integer("0")));
+    warn_if_false(big_integer("30000000") / 10000000 == (big_integer("3")));
+    warn_if_false(big_integer("2000000") - big_integer("1999999") == (big_integer("1")));
+    warn_if_false(big_integer("4000000000000") - big_integer("3999999999999") == (big_integer("1")));
+    warn_if_false(big_integer("1999999") + big_integer("1") == (big_integer("2000000")));
+    warn_if_false(big_integer("1") + big_integer("3999999999999") == (big_integer("4000000000000")));
+    warn_if_false(big_integer("4000000000000") / big_integer("6000000") == (big_integer("666666")));
+    warn_if_false(-big_integer("412341212123434") / big_integer("23412312351")==-big_integer("17612"));
     print_test_results();
 }
