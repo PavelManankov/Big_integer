@@ -314,12 +314,10 @@ big_integer operator-(big_integer const&a,big_integer const&b)
 
 big_integer mul_long_short(big_integer const&a, int b)
 {
-    assert(b >= 0 && b < BASE);
+    assert(b > 0 && b < BASE);
 
     digit carry = 0;
     big_integer c;
-    if(b==0)
-        return c;
 
     c.digits.resize(a.digits.size() + 1);
     size_t i;
