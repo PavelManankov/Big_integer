@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <ostream>
 
 const int BASE = 2000000;
 typedef int digit;
@@ -20,7 +21,7 @@ struct big_integer
     bool sign;
 };
 
-void print(big_integer val);
+std::ostream& operator<<(std::ostream& os, big_integer);
 
 big_integer operator+(big_integer const& a,big_integer const& b);
 big_integer operator-(big_integer const& a,big_integer const& b);

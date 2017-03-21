@@ -203,16 +203,16 @@ digit big_integer::get_digit(size_t index) const
     return digits[index];
 }
 
-void print(big_integer val)
+std::ostream& operator<<(std::ostream& os, big_integer val)
 {
     if (val.sign)
     {
-        printf("-");
+        os << '-';
         val = -val;
     }
 
     if (val.digits.size() == 0)
-        printf("0");
+        os << '0';
     else
     {
         std::string result;
@@ -226,9 +226,10 @@ void print(big_integer val)
         for (size_t i = 0; i != (result.size() / 2); ++i)
             std::swap(result[i], result[result.size() - i - 1]);
 
-        printf("%s", result.c_str());
+        os << result;
     }
-    printf("\n");
+
+    return os;
 }
 
 static bool abs_less(big_integer const& a, big_integer const& b)

@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <cassert>
 #include <chrono>
+#include <sstream>
 #include <iostream>
 
 #include "testing.h"
@@ -187,5 +188,26 @@ int main()
     warn_if_false(big_integer("1") + big_integer("3999999999999") == (big_integer("4000000000000")));
     warn_if_false(big_integer("4000000000000") / big_integer("6000000") == (big_integer("666666")));
     warn_if_false(-big_integer("412341212123434") / big_integer("23412312351")==-big_integer("17612"));
+    {
+        std::stringstream ss;
+        ss << big_integer("100");
+        warn_if_false(ss.str() == "100");
+    }
+    {
+        std::stringstream ss;
+        ss << big_integer("00100");
+        warn_if_false(ss.str() == "100");
+    }
+    {
+        std::stringstream ss;
+        ss << -big_integer("0");
+        warn_if_false(ss.str() == "0");
+    }
+    {
+        std::stringstream ss;
+        ss << -big_integer(5);
+        warn_if_false(ss.str() == "-5");
+    }
+
     print_test_results();
 }
