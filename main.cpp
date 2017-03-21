@@ -188,6 +188,8 @@ int main()
     warn_if_false(big_integer("1") + big_integer("3999999999999") == (big_integer("4000000000000")));
     warn_if_false(big_integer("4000000000000") / big_integer("6000000") == (big_integer("666666")));
     warn_if_false(-big_integer("412341212123434") / big_integer("23412312351")==-big_integer("17612"));
+    warn_if_false(big_integer("-1") == -big_integer("1"));
+    warn_if_false(big_integer("-0") == big_integer("0"));
     {
         std::stringstream ss;
         ss << big_integer("100");

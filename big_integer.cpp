@@ -186,13 +186,27 @@ big_integer::big_integer(int a)
 
 big_integer::big_integer(std::string const& str)
 {
+    assert(str.size() != 0);
+
     sign = false;
-    for (size_t i = 0; i != str.size(); ++i)
+
+    bool has_minus = false;
+    size_t i = 0;
+    if (str[0] == '-')
+    {
+        has_minus = true;
+        ++i;
+    }
+
+    for (; i != str.size(); ++i)
     {
         char c = str[i];
         assert(c >= '0' && c <= '9');
         *this = *this * big_integer(10) + big_integer(c - '0');
     }
+
+    if (has_minus && digits.size() != 0)
+        sign = true;
 }
 
 digit big_integer::get_digit(size_t index) const
@@ -201,6 +215,14 @@ digit big_integer::get_digit(size_t index) const
         return 0;
 
     return digits[index];
+}
+
+std::istream& operator>>(std::istream& is, big_integer& val)
+{
+    std::string tmp;
+    is >> tmp;
+    val = big_integer(tmp);
+    return is;
 }
 
 std::ostream& operator<<(std::ostream& os, big_integer val)
