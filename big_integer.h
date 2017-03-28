@@ -56,4 +56,5 @@ bool operator>(big_integer const& a, big_integer const& b);
 bool operator<=(big_integer const& a, big_integer const& b);
 bool operator>=(big_integer const& a, big_integer const& b);
 
+big_integer factorial(int a);
 #endif // BIG_INTEGER_H

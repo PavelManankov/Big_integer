@@ -592,3 +592,15 @@ bool operator>=(big_integer const& a, big_integer const& b)
 {
     return !(a < b);
 }
+
+big_integer factorial(int a)
+{
+    assert(a>=0);
+
+    big_integer c = 1;
+    for (int i = 1; i <= a; i++)
+    {
+        c *= i;
+    }
+    return c;
+}
