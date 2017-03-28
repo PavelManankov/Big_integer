@@ -593,14 +593,27 @@ bool operator>=(big_integer const& a, big_integer const& b)
     return !(a < b);
 }
 
-big_integer factorial(int a)
+big_integer number_of_permutations(int n)
 {
-    assert(a>=0);
+    assert(n>=0);
+
+    return number_of_partial_permutations(n,n);
+}
+
+big_integer number_of_partial_permutations(int n, int k)
+{
+    assert(0<=k && k<=n);
 
     big_integer c = 1;
-    for (int i = 1; i <= a; i++)
-    {
+    for(int i = n-k+1; i<=n; ++i)
         c *= i;
-    }
     return c;
+}
+
+big_integer number_of_combinations(int n, int k)
+{
+    assert(0<=k && k<=n);
+    if(n<(k*2))
+        k=n-k;
+    return number_of_partial_permutations(n,k) / number_of_permutations(k);
 }

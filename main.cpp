@@ -191,7 +191,16 @@ int main()
     warn_if_false(big_integer("-1") == -big_integer("1"));
     warn_if_false(big_integer("-0") == big_integer("0"));
 
-    warn_if_false(factorial(2)==2);
+    warn_if_false(number_of_permutations(0)==1);
+    warn_if_false(number_of_permutations(1)==1);
+    warn_if_false(number_of_permutations(2)==2);
+    warn_if_false(number_of_permutations(7)==5040);
+    warn_if_false(number_of_partial_permutations(9,5)==(5*6*7*8*9));
+    warn_if_false(number_of_combinations(5, 2)==10);
+    warn_if_false(number_of_combinations(6, 2)==15);
+    warn_if_false(number_of_combinations(0, 0)==1);
+    warn_if_false(number_of_combinations(5, 5)==1);
+    warn_if_false(number_of_combinations(5, 0)==1);
     {
         std::stringstream ss;
         ss << big_integer("100");

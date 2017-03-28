@@ -56,5 +56,7 @@ bool operator>(big_integer const& a, big_integer const& b);
 bool operator<=(big_integer const& a, big_integer const& b);
 bool operator>=(big_integer const& a, big_integer const& b);
 
-big_integer factorial(int a);
+big_integer number_of_permutations(int n);
+big_integer number_of_partial_permutations (int n, int k);
+big_integer number_of_combinations(int n,int k);
 #endif // BIG_INTEGER_H
