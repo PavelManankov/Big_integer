@@ -617,3 +617,40 @@ big_integer number_of_combinations(int n, int k)
         k=n-k;
     return number_of_partial_permutations(n,k) / number_of_permutations(k);
 }
+
+big_integer gcd_euclid(big_integer a, big_integer b)
+{
+    if(a.sign)
+        a.sign=!a.sign;
+    if(b.sign)
+        b.sign=!b.sign;
+    if(a==0)
+        return b;
+    if(b==0)
+        return a;
+
+    for (;;)
+    {
+        big_integer m = a%b;
+        if (m==0)
+        {
+            return b;
+        }
+        a = b;
+        b = m;
+    }
+}
+
+big_integer lcm_euclid(big_integer a, big_integer b)
+{
+    if(a.sign)
+        a.sign=!a.sign;
+    if(b.sign)
+        b.sign=!b.sign;
+    if(a==0)
+        return a;
+    if(b==0)
+        return b;
+
+    return a / gcd_euclid(a,b) * b;
+}

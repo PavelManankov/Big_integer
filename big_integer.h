@@ -59,4 +59,7 @@ bool operator>=(big_integer const& a, big_integer const& b);
 big_integer number_of_permutations(int n);
 big_integer number_of_partial_permutations (int n, int k);
 big_integer number_of_combinations(int n,int k);
+
+big_integer gcd_euclid(big_integer a, big_integer b);
+big_integer lcm_euclid(big_integer a, big_integer b);
 #endif // BIG_INTEGER_H

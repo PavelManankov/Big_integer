@@ -201,6 +201,15 @@ int main()
     warn_if_false(number_of_combinations(0, 0)==1);
     warn_if_false(number_of_combinations(5, 5)==1);
     warn_if_false(number_of_combinations(5, 0)==1);
+
+    warn_if_false(gcd_euclid(16, 20)==4);
+    warn_if_false(gcd_euclid(-16, -20)==4);
+    warn_if_false(gcd_euclid(0, -20)==20);
+    warn_if_false(lcm_euclid(16, 20)==80);
+    warn_if_false(lcm_euclid(-16, -20)==80);
+    warn_if_false(lcm_euclid(0, -20)==0);
+    warn_if_false(lcm_euclid(-16, 0)==0);
+
     {
         std::stringstream ss;
         ss << big_integer("100");
